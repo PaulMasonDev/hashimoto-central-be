@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//TODO: GET B/E ON HEROKU, REFACTOR server.js with routes, IMPLEMENT TYPESCRIPT FOR NODE,
+//CREATE NEW ROUTES FOR DIFFERENT WEBSITES
 app.get("/getLinkList/:searchTerm", async (req, res) => {
   const { searchTerm } = req.params;
   res.send(await getHtml(`https://www.healmedelicious.com/?s=${searchTerm}`));
