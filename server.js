@@ -71,7 +71,6 @@ const getHtml = async (url) => {
 
     linkArr.push({ link, imgSrc, name, source });
   });
-  console.log(`FOUND ${linkArr.length} RESULTS FROM HEALMEDELICIOUS`);
   return linkArr;
 };
 
