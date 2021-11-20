@@ -19,7 +19,7 @@ app.use(express.json());
 
 //TODO: REFACTOR server.js with routes,
 //CREATE NEW ROUTES FOR DIFFERENT WEBSITES
-app.get("/getLinkList/:searchTerm", async (req, res) => {
+app.get("/hmd/getLinkList/:searchTerm", async (req, res) => {
   const { searchTerm } = req.params;
   res.send(await getHtml(`https://www.healmedelicious.com/?s=${searchTerm}`));
 });
