@@ -49,14 +49,15 @@ const generateCondensedRecipe = async (url) => {
 
 const getHtml = async (url) => {
   const $ = await loadHtml(url);
-  const source = "healmedelicious.com";
+  const sourceUrl = "healmedelicious.com";
+  const sourceName = "Heal Me Delicious";
   const healMeDeliciousLinks = $(".entry-header");
   const linkArr = [];
   healMeDeliciousLinks.each((index, value) => {
     const link = $(value).find("a.entry-image-link").attr("href");
     const imgSrc = $(value).find(".entry-image-link").find("img").attr("src");
     const name = $(value).find(".entry-title-link").text();
-    linkArr.push({ link, imgSrc, name, source });
+    linkArr.push({ link, imgSrc, name, sourceUrl, sourceName });
   });
   return linkArr;
 };
