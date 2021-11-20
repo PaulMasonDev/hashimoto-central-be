@@ -12,7 +12,9 @@ app.use(express.json());
 //CREATE NEW ROUTES FOR DIFFERENT WEBSITES
 app.get("/hmd/getLinkList/:searchTerm", async (req, res) => {
   const { searchTerm } = req.params;
-  res.send(await getHtml(`https://www.healmedelicious.com/?s=${searchTerm}`));
+  res.send(
+    await getHtml(`https://www.healmedelicious.com/page/1/?s=${searchTerm}`)
+  );
 });
 
 app.put("/hmd/generateCondensedRecipe", async (req, res) => {
@@ -20,7 +22,28 @@ app.put("/hmd/generateCondensedRecipe", async (req, res) => {
   res.send(await generateCondensedRecipe(link));
 });
 
+const extractPageNumber = (url) => {
+  regex = /page\/\d+/;
+  const urlPageSection = url.match(regex)[0];
+  return parseInt(urlPageSection.match(/\d+/));
+};
+
+const incrementPage = (url) => {
+  return extractPageNumber(url) + 1;
+};
 const loadHtml = async (url) => {
+  // console.log(incrementPage(url));
+  // let newUrl = url;
+  // let status = 200;
+  // while ((status = 200)) {
+  //   try {
+  //     const response = await axios.get(newUrl);
+  //     console.log(response.status);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
   try {
     //This is how to get the website:
     const response = await axios.get(url);
@@ -36,7 +59,6 @@ const generateCondensedRecipe = async (url) => {
   const ingredients = $(".tasty-recipe-ingredients li");
   const ingredientsArr = [];
   ingredients.each((index, value) => {
-    //console.log($(value).text());
     ingredientsArr.push($(value).text());
   });
   const instructions = $(".tasty-recipe-instructions li");
@@ -59,6 +81,7 @@ const getHtml = async (url) => {
     const name = $(value).find(".entry-title-link").text();
     linkArr.push({ link, imgSrc, name, sourceUrl, sourceName });
   });
+  console.log({ linkArr });
   return linkArr;
 };
 
