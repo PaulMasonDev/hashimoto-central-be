@@ -44,7 +44,7 @@ const generateCondensedRecipe = async (url) => {
   instructions.each((index, value) => {
     instructionsArr.push($(value).text());
   });
-  return { ingredientsArr, instructionsArr };
+  return { ingredients: ingredientsArr, instructions: instructionsArr };
 };
 
 const getHtml = async (url) => {
