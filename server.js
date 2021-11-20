@@ -54,12 +54,8 @@ const getHtml = async (url) => {
   const linkArr = [];
   healMeDeliciousLinks.each((index, value) => {
     const link = $(value).find("a.entry-image-link").attr("href");
-    const imgSrc = $(value)
-      .find(".entry-image-link")
-      .find("img")
-      .attr("data-src");
+    const imgSrc = $(value).find(".entry-image-link").find("img").attr("src");
     const name = $(value).find(".entry-title-link").text();
-
     linkArr.push({ link, imgSrc, name, source });
   });
   return linkArr;
