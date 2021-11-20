@@ -6,15 +6,6 @@ const app = express();
 
 app.use(cors());
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
 app.use(express.json());
 
 //TODO: REFACTOR server.js with routes,
@@ -24,7 +15,7 @@ app.get("/hmd/getLinkList/:searchTerm", async (req, res) => {
   res.send(await getHtml(`https://www.healmedelicious.com/?s=${searchTerm}`));
 });
 
-app.put("/generateCondensedRecipe", async (req, res) => {
+app.put("/hmd/generateCondensedRecipe", async (req, res) => {
   const { link } = req.body;
   res.send(await generateCondensedRecipe(link));
 });
